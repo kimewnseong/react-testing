@@ -5,19 +5,23 @@ import { replaceCamelWithSpaces } from "./App";
 test("Button has correct initial color, and updates when clicked", () => {
   render(<App />);
   // Change to blue라는 텍스트를 가지며 버튼 역할인 요소를 찾음
-  const colorButton = screen.getByRole("button", { name: "Change to blue" });
+  const colorButton = screen.getByRole("button", {
+    name: "Change to Midnight Blue",
+  });
   // 단언
-  expect(colorButton).toHaveStyle({ backgroundColor: "red" });
+  expect(colorButton).toHaveStyle({ backgroundColor: "MediumVioletRed" });
 
   // click 이벤트
   fireEvent.click(colorButton);
-  expect(colorButton).toHaveStyle({ backgroundColor: "blue" });
-  expect(colorButton).toHaveTextContent("Change to red");
+  expect(colorButton).toHaveStyle({ backgroundColor: "MidnightBlue" });
+  expect(colorButton).toHaveTextContent("Change to Medium Violet Red");
 });
 
 test("initial conditions", () => {
   render(<App />);
-  const colorButton = screen.getByRole("button", { name: "Change to blue" });
+  const colorButton = screen.getByRole("button", {
+    name: "Change to Midnight Blue",
+  });
   expect(colorButton).toBeEnabled();
 
   const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
@@ -49,7 +53,7 @@ test("color change after check", () => {
 
   // checkbox 다시 클릭
   fireEvent.click(checkbox);
-  expect(colorButton).toHaveStyle({ backgroundColor: "red" });
+  expect(colorButton).toHaveStyle({ backgroundColor: "MediumVioletRed" });
 });
 
 test("check after click button", () => {
@@ -57,7 +61,7 @@ test("check after click button", () => {
   const colorButton = screen.getByRole("button");
   const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
 
-  // 버튼 클릭 -> 색변경 (red->blue)
+  // 버튼 클릭 -> 색변경 (MediumVioletRed -> MidnightBlue)
   fireEvent.click(colorButton);
 
   // checkbox 처음 클릭
@@ -66,10 +70,10 @@ test("check after click button", () => {
 
   // checkbox 다시 클릭
   fireEvent.click(checkbox);
-  expect(colorButton).toHaveStyle({ backgroundColor: "blue" });
+  expect(colorButton).toHaveStyle({ backgroundColor: "MidnightBlue" });
 });
 
-describe("space before camel-case capital letters", () => {
+describe("spaces before camel-case capital letters", () => {
   // ex) Red
   test("Works for no inner capital letters", () => {
     expect(replaceCamelWithSpaces("Red")).toBe("Red");
